@@ -25,11 +25,16 @@ public class Player : MonoBehaviour
     void Update()
     {
         PlayerMovement();
-        float mouseX = Input.GetAxisRaw(HORIZONTAL_RAW_KEY) * Time.deltaTime* mouseSensitivity;
+        CameraMovement();
+    }
+
+    private void CameraMovement()
+    {
+        float mouseX = Input.GetAxisRaw(HORIZONTAL_RAW_KEY) * Time.deltaTime * mouseSensitivity;
         float mouseY = Input.GetAxisRaw(VERTICAL_RAW_KEY) * Time.deltaTime * mouseSensitivity;
 
         cameraVerticalRotation = cameraVerticalRotation - mouseY;
-        cameraVerticalRotation = Mathf.Clamp(cameraVerticalRotation, -80f, 60f);
+        cameraVerticalRotation = Mathf.Clamp(cameraVerticalRotation, -80f, 20f);
 
         transform.Rotate(Vector3.up * mouseX);
         myCameraHead.localRotation = Quaternion.Euler(cameraVerticalRotation, 0f, 0f);
