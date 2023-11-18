@@ -6,6 +6,11 @@ public class Player : MonoBehaviour
 {
     [SerializeField] public float speed;
     [SerializeField] public CharacterController controller;
+
+    private string HORIZONTAL_KEY = "Horizontal";
+    private string VERTICAL_KEY = "Vertical";
+    private float DELTA_TIME = Time.deltaTime;
+
     void Start()
     {
         
@@ -14,6 +19,10 @@ public class Player : MonoBehaviour
    
     void Update()
     {
-        controller.Move(Vector3.forward * speed);
+        float x = Input.GetAxis(HORIZONTAL_KEY);
+        float z = Input.GetAxis(VERTICAL_KEY);
+
+        Vector3 movement = x * transform.right + z * transform.forward;
+        controller.Move(movement * DELTA_TIME * speed);
     }
 }
