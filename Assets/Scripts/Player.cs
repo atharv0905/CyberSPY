@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     [SerializeField] public CharacterController controller;
     [SerializeField] public float mouseSensitivity;
     private float cameraVerticalRotation = 0;
-    [SerializeField] public Transform camera;
+    [SerializeField] public Transform myCameraHead;
 
     private string HORIZONTAL_KEY = "Horizontal";
     private string HORIZONTAL_RAW_KEY = "Mouse X";
@@ -29,8 +29,10 @@ public class Player : MonoBehaviour
         float mouseY = Input.GetAxisRaw(VERTICAL_RAW_KEY) * Time.deltaTime * mouseSensitivity;
 
         cameraVerticalRotation = cameraVerticalRotation - mouseY;
+        cameraVerticalRotation = Mathf.Clamp(cameraVerticalRotation, -80f, 60f);
+
         transform.Rotate(Vector3.up * mouseX);
-        camera.localRotation = Quaternion.Euler(cameraVerticalRotation, 0f, 0f);
+        myCameraHead.localRotation = Quaternion.Euler(cameraVerticalRotation, 0f, 0f);
     }
 
     void PlayerMovement()
