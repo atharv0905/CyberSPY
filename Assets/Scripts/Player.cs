@@ -9,20 +9,26 @@ public class Player : MonoBehaviour
 
     private string HORIZONTAL_KEY = "Horizontal";
     private string VERTICAL_KEY = "Vertical";
-    private float DELTA_TIME = Time.deltaTime;
+    
 
     void Start()
     {
-        
+        Debug.Log("Game Started");
     }
 
    
     void Update()
     {
+        PlayerMovement();
+    }
+
+    void PlayerMovement()
+    {
         float x = Input.GetAxis(HORIZONTAL_KEY);
         float z = Input.GetAxis(VERTICAL_KEY);
 
         Vector3 movement = x * transform.right + z * transform.forward;
-        controller.Move(movement * DELTA_TIME * speed);
+        movement = movement * Time.deltaTime * speed;
+        controller.Move(movement);
     }
 }
