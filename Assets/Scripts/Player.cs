@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] public float speed;
+    [SerializeField] public CharacterController controller;
     void Start()
     {
         
     }
 
-    // Update is called once per frame
+   
     void Update()
     {
-        
+        controller.Move(Vector3.forward * speed);
     }
 }
