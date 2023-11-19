@@ -19,6 +19,9 @@ public class Player : MonoBehaviour
     public GameObject bullet;
     public Transform firePoint;
 
+    public GameObject muzzleFlash;
+    public GameObject bulletHole;
+
     void Start()
     {
         Debug.Log("Game Started");
@@ -50,6 +53,7 @@ public class Player : MonoBehaviour
                 firePoint.LookAt(myCameraHead.position + (myCameraHead.forward * 50f));
             }
             Instantiate(bullet, firePoint.position, firePoint.rotation);
+            Instantiate(muzzleFlash, firePoint.position, firePoint.rotation, firePoint);
         }
     }
 
