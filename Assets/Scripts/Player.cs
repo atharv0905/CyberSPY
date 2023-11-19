@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -28,8 +29,26 @@ public class Player : MonoBehaviour
     {
         PlayerMovement();
         CameraMovement();
-        if(Input.GetMouseButtonDown(0))
+        Shoot();
+    }
+
+    private void Shoot()
+    {
+        if (Input.GetMouseButtonDown(0))
         {
+            RaycastHit hit;
+
+            if(Physics.Raycast(myCameraHead.position, myCameraHead.forward, out hit, 100f))
+            {
+                if(Vector3.Distance(myCameraHead.position, hit.point) >= 2f) 
+                {
+                    firePoint.LookAt(hit.point);
+                }
+            }
+            else
+            {
+                firePoint.LookAt(myCameraHead.position + (myCameraHead.forward * 50f));
+            }
             Instantiate(bullet, firePoint.position, firePoint.rotation);
         }
     }
