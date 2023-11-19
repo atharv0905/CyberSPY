@@ -48,15 +48,14 @@ public class Player : MonoBehaviour
                 {
                     firePoint.LookAt(hit.point);
                     if(hit.collider.tag == "Shootable")
-                    {
                         Instantiate(bulletHole, hit.point, Quaternion.LookRotation(hit.normal));
-                    }
 
                     if (hit.collider.tag == "WaterLeaker")
-                    {
                         Instantiate(waterLeak, hit.point, Quaternion.LookRotation(hit.normal));
-                    }
                 }
+
+                //if(hit.collider.tag == "Enemies")
+                //    Destroy(hit.collider.gameObject);
             }
             else
             {
@@ -73,7 +72,7 @@ public class Player : MonoBehaviour
         float mouseY = Input.GetAxisRaw(VERTICAL_RAW_KEY) * Time.deltaTime * mouseSensitivity;
 
         cameraVerticalRotation = cameraVerticalRotation - mouseY;
-        cameraVerticalRotation = Mathf.Clamp(cameraVerticalRotation, -80f, 60f);
+        cameraVerticalRotation = Mathf.Clamp(cameraVerticalRotation, -80f, 40f);
 
         transform.Rotate(Vector3.up * mouseX);
         myCameraHead.localRotation = Quaternion.Euler(cameraVerticalRotation, 0f, 0f);
