@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] public float speed;
-    [SerializeField] public CharacterController controller;
-    [SerializeField] public float mouseSensitivity;
+    public float speed;
+    public CharacterController controller;
+    public float mouseSensitivity;
     private float cameraVerticalRotation = 0;
-    [SerializeField] public Transform myCameraHead;
+    public Transform myCameraHead;
 
     private string HORIZONTAL_KEY = "Horizontal";
     private string HORIZONTAL_RAW_KEY = "Mouse X";
@@ -21,6 +21,7 @@ public class Player : MonoBehaviour
 
     public GameObject muzzleFlash;
     public GameObject bulletHole;
+    public GameObject waterLeak;
 
     void Start()
     {
@@ -46,6 +47,15 @@ public class Player : MonoBehaviour
                 if(Vector3.Distance(myCameraHead.position, hit.point) >= 2f) 
                 {
                     firePoint.LookAt(hit.point);
+                    if(hit.collider.tag == "Shootable")
+                    {
+                        Instantiate(bulletHole, hit.point, Quaternion.LookRotation(hit.normal));
+                    }
+
+                    if (hit.collider.tag == "WaterLeaker")
+                    {
+                        Instantiate(waterLeak, hit.point, Quaternion.LookRotation(hit.normal));
+                    }
                 }
             }
             else
@@ -63,7 +73,7 @@ public class Player : MonoBehaviour
         float mouseY = Input.GetAxisRaw(VERTICAL_RAW_KEY) * Time.deltaTime * mouseSensitivity;
 
         cameraVerticalRotation = cameraVerticalRotation - mouseY;
-        cameraVerticalRotation = Mathf.Clamp(cameraVerticalRotation, -80f, 20f);
+        cameraVerticalRotation = Mathf.Clamp(cameraVerticalRotation, -80f, 60f);
 
         transform.Rotate(Vector3.up * mouseX);
         myCameraHead.localRotation = Quaternion.Euler(cameraVerticalRotation, 0f, 0f);
