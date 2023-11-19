@@ -813,7 +813,7 @@ Transform:
   m_GameObject: {fileID: 409819237}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 18.15, y: 1.08, z: 17.76}
+  m_LocalPosition: {x: 18.15, y: 1.4, z: 17.76}
   m_LocalScale: {x: 3.4892552, y: 0.16746, z: 0.44719878}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1305,7 +1305,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 63
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -1446,7 +1446,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 20.24, y: 0.47, z: 17.85}
-  m_LocalScale: {x: 1, y: 1.7168, z: 1}
+  m_LocalScale: {x: 1, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1694096088}
@@ -1552,7 +1552,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 16.12, y: 0.47, z: 17.85}
-  m_LocalScale: {x: 1, y: 1.7168, z: 1}
+  m_LocalScale: {x: 1, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1694096088}
@@ -1884,7 +1884,7 @@ GameObject:
   - component: {fileID: 1088057661}
   - component: {fileID: 1088057660}
   - component: {fileID: 1088057659}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Eyes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
