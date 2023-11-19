@@ -6,10 +6,15 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public float speed;
+
+    public Vector3 velocity;
+    public float gravityModifier;
+
     public CharacterController controller;
+    public Transform myCameraHead;
+
     public float mouseSensitivity;
     private float cameraVerticalRotation = 0;
-    public Transform myCameraHead;
 
     private string HORIZONTAL_KEY = "Horizontal";
     private string HORIZONTAL_RAW_KEY = "Mouse X";
@@ -54,8 +59,8 @@ public class Player : MonoBehaviour
                         Instantiate(waterLeak, hit.point, Quaternion.LookRotation(hit.normal));
                 }
 
-                if(hit.collider.tag == "Enemies")
-                    Destroy(hit.collider.gameObject);
+                //if(hit.collider.tag == "Enemies")
+                //    Destroy(hit.collider.gameObject);
             }
             else
             {
@@ -86,5 +91,13 @@ public class Player : MonoBehaviour
         Vector3 movement = x * transform.right + z * transform.forward;
         movement = movement * Time.deltaTime * speed;
         controller.Move(movement);
+
+        velocity.y += Physics.gravity.y * Mathf.Pow(Time.deltaTime, 2) * gravityModifier;
+        controller.Move(velocity);
+
+        if (controller.isGrounded)
+        {
+            velocity.y = Physics.gravity.y * Time.deltaTime;
+        }
     }
 }
