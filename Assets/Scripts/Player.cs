@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -6,6 +7,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public float speed;
+    public float autoFireRate;
 
     public Vector3 velocity;
     public float gravityModifier;
@@ -39,6 +41,34 @@ public class Player : MonoBehaviour
         PlayerMovement();
         CameraMovement();
         Shoot();
+        Invoke(nameof(AutoFire), autoFireRate);
+    }
+
+    private void AutoFire()
+    {
+        RaycastHit hit;
+        if(Physics.Raycast(myCameraHead.position, myCameraHead.forward, out hit, 200f))
+        {
+            if(Vector3.Distance(myCameraHead.position, hit.point) >= 2f)
+            {
+                firePoint.LookAt(hit.point);
+                if (hit.collider.tag == "Enemies")
+                {
+                    if (hit.collider.tag == "Shootable")
+                        Instantiate(bulletHole, hit.point, Quaternion.LookRotation(hit.normal));
+
+                    if (hit.collider.tag == "WaterLeaker")
+                        Instantiate(waterLeak, hit.point, Quaternion.LookRotation(hit.normal));
+
+                    Instantiate(bullet, firePoint.position, firePoint.rotation);
+                    Instantiate(muzzleFlash, firePoint.position, firePoint.rotation, firePoint);
+                }
+            }
+            else
+            {
+                firePoint.LookAt(myCameraHead.position + (myCameraHead.forward * 50f));
+            }
+        }
     }
 
     private void Shoot()
