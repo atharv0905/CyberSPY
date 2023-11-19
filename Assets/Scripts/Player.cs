@@ -15,6 +15,8 @@ public class Player : MonoBehaviour
     private string VERTICAL_KEY = "Vertical";
     private string VERTICAL_RAW_KEY = "Mouse Y";
 
+    public GameObject bullet;
+    public Transform firePoint;
 
     void Start()
     {
@@ -26,6 +28,10 @@ public class Player : MonoBehaviour
     {
         PlayerMovement();
         CameraMovement();
+        if(Input.GetMouseButtonDown(0))
+        {
+            Instantiate(bullet, firePoint.position, firePoint.rotation);
+        }
     }
 
     private void CameraMovement()

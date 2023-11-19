@@ -18,6 +18,6 @@ public class BulletController : MonoBehaviour
 
     private void BulletFly()
     {
-        myRigidBody.velocity = Vector3.forward * speed;
+        myRigidBody.velocity = transform.forward * speed;
     }
 }
