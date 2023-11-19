@@ -42,8 +42,16 @@ public class Player : MonoBehaviour
     public LayerMask groundLayer;
     public float groundDistance;
 
+    // crouching variables
+    private Vector3 crouchScale = new Vector3(1f, 0.5f, 1f);
+    private Vector3 bodyScale;
+    public Transform myBody;
+    public float crouchSpeed;
+    private bool isCrouching = false;
+
     void Start()
     {
+        bodyScale = myBody.localScale;
         Debug.Log("Game Started");
     }
 
@@ -54,8 +62,33 @@ public class Player : MonoBehaviour
         CameraMovement();
         Shoot();
         Jump();
+        Crouch();
         //Invoke(nameof(AutoFire), autoFireRate);
     }
+
+    private void Crouch()
+    {
+        if (Input.GetKeyDown(KeyCode.C))
+            StartCrouching();
+        if (Input.GetKeyUp(KeyCode.C))
+            StopCrouching();
+    }
+
+    private void StopCrouching()
+    {
+        myBody.localScale = bodyScale;
+        myCameraHead.position += new Vector3(0, 0.5f, 0);
+        controller.height *= 2.5f;
+        isCrouching = true;
+    }
+
+    private void StartCrouching()
+    {
+        myBody.localScale = crouchScale;
+        myCameraHead.position -= new Vector3(0, 0.5f, 0);
+        controller.height /= 2.5f;
+        isCrouching = false;
+    }   
 
     private void Jump()
     {
@@ -142,7 +175,11 @@ public class Player : MonoBehaviour
         float z = Input.GetAxis(VERTICAL_KEY);
 
         Vector3 movement = x * transform.right + z * transform.forward;
-        movement = movement * Time.deltaTime * speed;
+        if(isCrouching) 
+            movement = movement * Time.deltaTime * crouchSpeed;
+        else
+            movement = movement * Time.deltaTime * speed;
+
         controller.Move(movement);
 
         velocity.y += Physics.gravity.y * Mathf.Pow(Time.deltaTime, 2) * gravityModifier;
