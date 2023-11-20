@@ -54,6 +54,9 @@ public class Player : MonoBehaviour
     public float crouchSpeed;
     private bool isCrouching = false;
 
+    // sprinting variables
+    public float sprintSpeed;
+
     void Start()
     {
         bodyScale = myBody.localScale;
@@ -180,10 +183,12 @@ public class Player : MonoBehaviour
         float z = Input.GetAxis(VERTICAL_KEY);
 
         Vector3 movement = x * transform.right + z * transform.forward;
-        if(isCrouching) 
-            movement = movement * Time.deltaTime * crouchSpeed;
+        if(Input.GetKeyDown(KeyCode.LeftShift) && !isCrouching)
+            movement = movement * sprintSpeed * Time.deltaTime;
+        if (isCrouching) 
+            movement = movement * crouchSpeed * Time.deltaTime;
         else
-            movement = movement * Time.deltaTime * speed;
+            movement = movement * speed * Time.deltaTime;
 
         myAnimator.SetFloat(ANIM_PLAYER_SPEED ,movement.magnitude);
         controller.Move(movement);
