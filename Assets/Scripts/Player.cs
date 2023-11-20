@@ -59,7 +59,10 @@ public class Player : MonoBehaviour
 
     // sliding variables
     public bool isRunning = false;
+    public bool startSlideTimer;
     public float slideSpeed;
+    public float currentSlideTimer;
+    public float maxSlideTimer;
 
     void Start()
     {
@@ -75,6 +78,7 @@ public class Player : MonoBehaviour
         Shoot();
         Jump();
         Crouch();
+        SlideCounter();
         //Invoke(nameof(AutoFire), autoFireRate);
     }
 
@@ -82,7 +86,7 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.C))
             StartCrouching();
-        if (Input.GetKeyUp(KeyCode.C))
+        if (Input.GetKeyUp(KeyCode.C) || currentSlideTimer > maxSlideTimer)
             StopCrouching();
     }
 
@@ -92,6 +96,10 @@ public class Player : MonoBehaviour
         myCameraHead.position += new Vector3(0, 0.5f, 0);
         controller.height *= 2.5f;
         isCrouching = false;
+
+        currentSlideTimer = 0;
+        velocity = new Vector3 (0, 0, 0);
+        startSlideTimer = false;
     }
 
     private void StartCrouching()
@@ -103,6 +111,7 @@ public class Player : MonoBehaviour
 
         if(isRunning)
         {
+            startSlideTimer = true;
             velocity = Vector3.ProjectOnPlane(myCameraHead.transform.forward, Vector3.up).normalized * slideSpeed * Time.deltaTime;
         }
     }   
@@ -208,7 +217,6 @@ public class Player : MonoBehaviour
         }
 
         myAnimator.SetFloat(ANIM_PLAYER_SPEED ,movement.magnitude);
-        Debug.Log(movement.magnitude);
         controller.Move(movement);
 
         velocity.y += Physics.gravity.y * Mathf.Pow(Time.deltaTime, 2) * gravityModifier;
@@ -217,6 +225,14 @@ public class Player : MonoBehaviour
         if (controller.isGrounded)
         {
             velocity.y = Physics.gravity.y * Time.deltaTime;
+        }
+    }
+
+    private void SlideCounter()
+    {
+        if (startSlideTimer)
+        {
+            currentSlideTimer += Time.deltaTime;
         }
     }
 }
