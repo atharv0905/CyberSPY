@@ -27,6 +27,11 @@ public class Player : MonoBehaviour
     private const string VERTICAL_RAW_KEY = "Mouse Y";
     private const string JUMP_KEY = "Jump";
 
+
+    // Animation variables
+    public Animator myAnimator;
+    private const string ANIM_PLAYER_SPEED = "PlayerSpeed";
+
     // firing variables
     public GameObject bullet;
     public Transform firePoint;
@@ -180,6 +185,7 @@ public class Player : MonoBehaviour
         else
             movement = movement * Time.deltaTime * speed;
 
+        myAnimator.SetFloat(ANIM_PLAYER_SPEED ,movement.magnitude);
         controller.Move(movement);
 
         velocity.y += Physics.gravity.y * Mathf.Pow(Time.deltaTime, 2) * gravityModifier;
