@@ -87,7 +87,7 @@ public class Player : MonoBehaviour
         myBody.localScale = bodyScale;
         myCameraHead.position += new Vector3(0, 0.5f, 0);
         controller.height *= 2.5f;
-        isCrouching = true;
+        isCrouching = false;
     }
 
     private void StartCrouching()
@@ -95,7 +95,8 @@ public class Player : MonoBehaviour
         myBody.localScale = crouchScale;
         myCameraHead.position -= new Vector3(0, 0.5f, 0);
         controller.height /= 2.5f;
-        isCrouching = false;
+        isCrouching = true;
+
     }   
 
     private void Jump()
@@ -183,14 +184,21 @@ public class Player : MonoBehaviour
         float z = Input.GetAxis(VERTICAL_KEY);
 
         Vector3 movement = x * transform.right + z * transform.forward;
-        if(Input.GetKeyDown(KeyCode.LeftShift) && !isCrouching)
+        if(Input.GetKey(KeyCode.LeftShift))
+        {
             movement = movement * sprintSpeed * Time.deltaTime;
-        if (isCrouching) 
+        }
+        else if (isCrouching)
+        {
             movement = movement * crouchSpeed * Time.deltaTime;
+        }
         else
+        {
             movement = movement * speed * Time.deltaTime;
+        }
 
         myAnimator.SetFloat(ANIM_PLAYER_SPEED ,movement.magnitude);
+        Debug.Log(movement.magnitude);
         controller.Move(movement);
 
         velocity.y += Physics.gravity.y * Mathf.Pow(Time.deltaTime, 2) * gravityModifier;
