@@ -2026,7 +2026,9 @@ MonoBehaviour:
   groundDistance: 0.5
   myBody: {fileID: 616896622}
   crouchSpeed: 7
-  sprintSpeed: 50
+  sprintSpeed: 30
+  isRunning: 0
+  slideSpeed: 30
 --- !u!143 &1279584789
 CharacterController:
   m_ObjectHideFlags: 0

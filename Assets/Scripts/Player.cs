@@ -57,6 +57,10 @@ public class Player : MonoBehaviour
     // sprinting variables
     public float sprintSpeed;
 
+    // sliding variables
+    public bool isRunning = false;
+    public float slideSpeed;
+
     void Start()
     {
         bodyScale = myBody.localScale;
@@ -97,6 +101,10 @@ public class Player : MonoBehaviour
         controller.height /= 2.5f;
         isCrouching = true;
 
+        if(isRunning)
+        {
+            velocity = Vector3.ProjectOnPlane(myCameraHead.transform.forward, Vector3.up).normalized * slideSpeed * Time.deltaTime;
+        }
     }   
 
     private void Jump()
@@ -184,9 +192,10 @@ public class Player : MonoBehaviour
         float z = Input.GetAxis(VERTICAL_KEY);
 
         Vector3 movement = x * transform.right + z * transform.forward;
-        if(Input.GetKey(KeyCode.LeftShift))
+        if(Input.GetKey(KeyCode.LeftShift) && !isCrouching)
         {
             movement = movement * sprintSpeed * Time.deltaTime;
+            isRunning = true;
         }
         else if (isCrouching)
         {
@@ -195,6 +204,7 @@ public class Player : MonoBehaviour
         else
         {
             movement = movement * speed * Time.deltaTime;
+            isRunning = false;
         }
 
         myAnimator.SetFloat(ANIM_PLAYER_SPEED ,movement.magnitude);
