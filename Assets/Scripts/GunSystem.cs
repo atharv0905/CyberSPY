@@ -12,6 +12,12 @@ public class GunSystem : MonoBehaviour
     public GameObject muzzleFlash;
     public GameObject bulletHole;
     public GameObject waterLeak;
+
+    public bool canAutoFire;
+    private bool shooting;
+    private bool readyToShoot = true;
+
+    public float timeBetweenShots;
     void Start()
     {
         
@@ -24,8 +30,15 @@ public class GunSystem : MonoBehaviour
 
     private void Shoot()
     {
-        if (Input.GetMouseButtonDown(0))
+        if(canAutoFire)
+            shooting = Input.GetMouseButton(0);
+        else
+            shooting = Input.GetMouseButtonDown(0);
+
+        if (shooting && readyToShoot)
         {
+            readyToShoot = false;
+
             RaycastHit hit;
 
             if (Physics.Raycast(myCameraHead.position, myCameraHead.forward, out hit, 100f))
@@ -49,6 +62,14 @@ public class GunSystem : MonoBehaviour
             }
             Instantiate(bullet, firePoint.position, firePoint.rotation, firePoint);
             Instantiate(muzzleFlash, firePoint.position, firePoint.rotation, firePoint);
+
+            StartCoroutine(ResetShot());
         }
+    }
+
+    IEnumerator ResetShot()
+    {
+        yield return new WaitForSeconds(timeBetweenShots);
+        readyToShoot = true;
     }
 }

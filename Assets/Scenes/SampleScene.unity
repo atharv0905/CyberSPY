@@ -1166,37 +1166,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 268659781}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &741438384
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 741438385}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &741438385
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 741438384}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.18296947, y: 1.2370163, z: 1.1354291}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -2399,6 +2368,8 @@ MonoBehaviour:
   muzzleFlash: {fileID: 1000010254994808, guid: 7e59a67fadb90ce45adbe273e1b2c064, type: 3}
   bulletHole: {fileID: 1000010355441670, guid: 54fafe8d0b9ba0243899a3f7fb649de7, type: 3}
   waterLeak: {fileID: 2608753425825485521, guid: dc6c13a8247c72c4e80b65b837f55398, type: 3}
+  canAutoFire: 1
+  timeBetweenShots: 0.2
 --- !u!1 &1694096087
 GameObject:
   m_ObjectHideFlags: 0
@@ -3460,4 +3431,3 @@ SceneRoots:
   - {fileID: 1279584787}
   - {fileID: 1789506484}
   - {fileID: 1419130562}
-  - {fileID: 741438385}
