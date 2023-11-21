@@ -32,13 +32,6 @@ public class Player : MonoBehaviour
     public Animator myAnimator;
     private const string ANIM_PLAYER_SPEED = "PlayerSpeed";
 
-    // firing variables
-    public GameObject bullet;
-    public Transform firePoint;
-
-    public GameObject muzzleFlash;
-    public GameObject bulletHole;
-    public GameObject waterLeak;
 
     // jumping variables
     public float jumpHeight;
@@ -75,11 +68,9 @@ public class Player : MonoBehaviour
     {
         PlayerMovement();
         CameraMovement();
-        Shoot();
         Jump();
         Crouch();
         SlideCounter();
-        //Invoke(nameof(AutoFire), autoFireRate);
     }
 
     private void Crouch()
@@ -124,63 +115,6 @@ public class Player : MonoBehaviour
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * Physics.gravity.y) * Time.deltaTime;
         }
         controller.Move(velocity);
-    }
-
-    private void AutoFire()
-    {
-        RaycastHit hit;
-        if(Physics.Raycast(myCameraHead.position, myCameraHead.forward, out hit, 200f))
-        {
-            if(Vector3.Distance(myCameraHead.position, hit.point) >= 2f)
-            {
-                firePoint.LookAt(hit.point);
-                if (hit.collider.tag == "Enemies")
-                {
-                    if (hit.collider.tag == "Shootable")
-                        Instantiate(bulletHole, hit.point, Quaternion.LookRotation(hit.normal));
-
-                    if (hit.collider.tag == "WaterLeaker")
-                        Instantiate(waterLeak, hit.point, Quaternion.LookRotation(hit.normal));
-
-                    Instantiate(bullet, firePoint.position, firePoint.rotation);
-                    Instantiate(muzzleFlash, firePoint.position, firePoint.rotation, firePoint);
-                }
-            }
-            else
-            {
-                firePoint.LookAt(myCameraHead.position + (myCameraHead.forward * 50f));
-            }
-        }
-    }
-
-    private void Shoot()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            RaycastHit hit;
-
-            if(Physics.Raycast(myCameraHead.position, myCameraHead.forward, out hit, 100f))
-            {
-                if(Vector3.Distance(myCameraHead.position, hit.point) >= 2f) 
-                {
-                    firePoint.LookAt(hit.point);
-                    if(hit.collider.tag == "Shootable")
-                        Instantiate(bulletHole, hit.point, Quaternion.LookRotation(hit.normal));
-
-                    if (hit.collider.tag == "WaterLeaker")
-                        Instantiate(waterLeak, hit.point, Quaternion.LookRotation(hit.normal));
-                }
-
-                //if(hit.collider.tag == "Enemies")
-                //    Destroy(hit.collider.gameObject);
-            }
-            else
-            {
-                firePoint.LookAt(myCameraHead.position + (myCameraHead.forward * 50f));
-            }
-            Instantiate(bullet, firePoint.position, firePoint.rotation);
-            Instantiate(muzzleFlash, firePoint.position, firePoint.rotation, firePoint);
-        }
     }
 
     private void CameraMovement()
