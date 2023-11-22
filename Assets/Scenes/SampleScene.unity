@@ -2368,8 +2368,13 @@ MonoBehaviour:
   muzzleFlash: {fileID: 1000010254994808, guid: 7e59a67fadb90ce45adbe273e1b2c064, type: 3}
   bulletHole: {fileID: 1000010355441670, guid: 54fafe8d0b9ba0243899a3f7fb649de7, type: 3}
   waterLeak: {fileID: 2608753425825485521, guid: dc6c13a8247c72c4e80b65b837f55398, type: 3}
-  canAutoFire: 1
-  timeBetweenShots: 0.2
+  canAutoFire: 0
+  timeBetweenShots: 0.1
+  bulletsAvailable: 0
+  totalBullets: 25
+  magazineSize: 10
+  reloadTime: 2
+  isReloading: 0
 --- !u!1 &1694096087
 GameObject:
   m_ObjectHideFlags: 0

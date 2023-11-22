@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,14 +19,31 @@ public class GunSystem : MonoBehaviour
     private bool readyToShoot = true;
 
     public float timeBetweenShots;
+
+    public int bulletsAvailable;
+    public int totalBullets;
+    public int magazineSize;
+    public float reloadTime;
+    public bool isReloading = false;
+
     void Start()
     {
-        
+        totalBullets -= magazineSize;
+        bulletsAvailable = magazineSize;
     }
 
     void Update()
     {
         Shoot();
+        GunManager();
+    }
+
+    private void GunManager()
+    {
+        if (Input.GetKeyDown(KeyCode.R) && bulletsAvailable < magazineSize && !isReloading)
+        {
+            Reload();
+        }
     }
 
     private void Shoot()
@@ -35,7 +53,7 @@ public class GunSystem : MonoBehaviour
         else
             shooting = Input.GetMouseButtonDown(0);
 
-        if (shooting && readyToShoot)
+        if (shooting && readyToShoot && bulletsAvailable > 0 && !isReloading)
         {
             readyToShoot = false;
 
@@ -60,16 +78,47 @@ public class GunSystem : MonoBehaviour
             {
                 firePoint.LookAt(myCameraHead.position + (myCameraHead.forward * 50f));
             }
+
+            bulletsAvailable--;
+
             Instantiate(bullet, firePoint.position, firePoint.rotation, firePoint);
             Instantiate(muzzleFlash, firePoint.position, firePoint.rotation, firePoint);
 
             StartCoroutine(ResetShot());
+
         }
+    }
+
+    private void Reload()
+    {
+        
+        int bulletsToAdd = magazineSize - bulletsAvailable;
+
+        if(totalBullets > bulletsToAdd)
+        {
+            totalBullets -= bulletsToAdd;
+            bulletsAvailable = magazineSize;
+        }
+        else
+        {
+            bulletsAvailable += totalBullets;
+            totalBullets = 0;
+        }
+
+        isReloading = true;
+        StartCoroutine(ReloadTime());
+
     }
 
     IEnumerator ResetShot()
     {
         yield return new WaitForSeconds(timeBetweenShots);
         readyToShoot = true;
+    }
+
+    IEnumerator ReloadTime()
+    {
+        yield return new WaitForSeconds(reloadTime);
+        isReloading = false;
     }
 }
