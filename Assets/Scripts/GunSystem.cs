@@ -31,6 +31,7 @@ public class GunSystem : MonoBehaviour
     public Transform aimPosition;
     private Vector3 gunStartPosition;
     private float aimTransitionSpeed = 2f;
+    public float zoomAmount;
 
     void Start()
     {
@@ -61,6 +62,15 @@ public class GunSystem : MonoBehaviour
         else
         {
             transform.localPosition = Vector3.MoveTowards(transform.localPosition, gunStartPosition, aimTransitionSpeed * Time.deltaTime);
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            FindObjectOfType<CameraMove>().ZoomIn(zoomAmount);
+        }
+        if (Input.GetMouseButtonUp(1))
+        {
+            FindObjectOfType<CameraMove>().ZoomOut();
         }
     }
 
