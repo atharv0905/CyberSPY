@@ -6,6 +6,7 @@ using UnityEngine;
 public class GunSystem : MonoBehaviour
 {
     public Transform myCameraHead;
+    private UICanvasController canvas;
 
     // firing variables
     public GameObject bullet;
@@ -30,12 +31,15 @@ public class GunSystem : MonoBehaviour
     {
         totalBullets -= magazineSize;
         bulletsAvailable = magazineSize;
+
+        canvas = FindObjectOfType<UICanvasController>();
     }
 
     void Update()
     {
         Shoot();
         GunManager();
+        UpdateAmmoText();
     }
 
     private void GunManager()
@@ -120,5 +124,11 @@ public class GunSystem : MonoBehaviour
     {
         yield return new WaitForSeconds(reloadTime);
         isReloading = false;
+    }
+
+    private void UpdateAmmoText()
+    {
+        canvas.ammoText.SetText(bulletsAvailable + "/" + magazineSize);
+        canvas.totalBulletsText.SetText(totalBullets.ToString());
     }
 }
