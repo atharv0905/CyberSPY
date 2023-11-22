@@ -27,11 +27,16 @@ public class GunSystem : MonoBehaviour
     public float reloadTime;
     public bool isReloading = false;
 
+    // aiming variables
+    public Transform aimPosition;
+    private Vector3 gunStartPosition;
+    private float aimTransitionSpeed = 2f;
+
     void Start()
     {
         totalBullets -= magazineSize;
         bulletsAvailable = magazineSize;
-
+        gunStartPosition = transform.localPosition;
         canvas = FindObjectOfType<UICanvasController>();
     }
 
@@ -47,6 +52,15 @@ public class GunSystem : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R) && bulletsAvailable < magazineSize && !isReloading)
         {
             Reload();
+        }
+
+        if (Input.GetMouseButton(1))
+        {
+            transform.position = Vector3.MoveTowards(transform.position, aimPosition.position, aimTransitionSpeed * Time.deltaTime);
+        }
+        else
+        {
+            transform.localPosition = Vector3.MoveTowards(transform.localPosition, gunStartPosition, aimTransitionSpeed * Time.deltaTime);
         }
     }
 
