@@ -9,20 +9,32 @@ public class EnemyAI : MonoBehaviour
 {
     NavMeshAgent agent;
     public LayerMask whatIsGround;
+    public LayerMask whatIsPlayer;
+    private Transform player;
 
+    // gaurding
     private Vector3 destinationPoint;
     private bool isDestinationSet;
     public float destinationRange;
 
+    // chasing
+    public float chaseRange;
+    private bool isPlayerInChaseRange;
+
     void Start()
     {
+        player = FindObjectOfType<Player>().transform;
         agent = GetComponent<NavMeshAgent>();
     }
 
 
     void Update()
     {
-        Gaurding();
+        isPlayerInChaseRange = Physics.CheckSphere(transform.position, chaseRange, whatIsPlayer);
+        if (!isPlayerInChaseRange)
+            Gaurding();
+        else if (isPlayerInChaseRange)
+            Chasing();
     }
 
     private void Gaurding()
@@ -40,6 +52,11 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
+    private void Chasing()
+    {
+        agent.SetDestination(player.position);
+    }
+
     private void SearchForDestination()
     {
         float randomPositionZ = Random.Range(-destinationRange, destinationRange);
@@ -52,5 +69,11 @@ public class EnemyAI : MonoBehaviour
             isDestinationSet = true;
         }
 
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, chaseRange);
     }
 }
