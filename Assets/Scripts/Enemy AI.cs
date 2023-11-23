@@ -25,6 +25,8 @@ public class EnemyAI : MonoBehaviour
     public float attackRange;
     private bool isPlayerInAttackRange;
     public GameObject EnemeyBullet;
+    public float grenadeThrowDelay;
+    private bool isEnemyReadyToAttack = true;
 
     void Start()
     {
@@ -42,7 +44,7 @@ public class EnemyAI : MonoBehaviour
             Gaurding();
         if (isPlayerInChaseRange && !isPlayerInAttackRange)
             Chasing();
-        if (isPlayerInChaseRange && isPlayerInAttackRange)
+        if (isPlayerInChaseRange && isPlayerInAttackRange && isEnemyReadyToAttack)
             Attacking();
     }
 
@@ -70,7 +72,13 @@ public class EnemyAI : MonoBehaviour
     {
         agent.SetDestination(transform.position);
         transform.LookAt(player);
-        Instantiate(EnemeyBullet, transform.position, Quaternion.identity);
+
+        if (isEnemyReadyToAttack)
+        {
+            Instantiate(EnemeyBullet, transform.position, transform.localRotation);
+            isEnemyReadyToAttack = false;
+            StartCoroutine(ThrowGrenadeDelay());
+        }
     }
     private void SearchForDestination()
     {
@@ -93,5 +101,11 @@ public class EnemyAI : MonoBehaviour
 
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
+    }
+
+    IEnumerator ThrowGrenadeDelay()
+    {
+        yield return new WaitForSeconds(grenadeThrowDelay);
+        isEnemyReadyToAttack = true;
     }
 }
