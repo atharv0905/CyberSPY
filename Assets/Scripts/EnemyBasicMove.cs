@@ -12,10 +12,10 @@ public class EnemyBasicMove : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+        player = FindObjectOfType<Player>().transform;
+
         animator.SetBool("Move", move);
         animator.SetBool("Rotating", rotate);
-
-        player = FindObjectOfType<Player>().transform;
     }
 
     // Update is called once per frame
