@@ -21,6 +21,11 @@ public class EnemyAI : MonoBehaviour
     public float chaseRange;
     private bool isPlayerInChaseRange;
 
+    // attacking
+    public float attackRange;
+    private bool isPlayerInAttackRange;
+    public GameObject EnemeyBullet;
+
     void Start()
     {
         player = FindObjectOfType<Player>().transform;
@@ -31,10 +36,14 @@ public class EnemyAI : MonoBehaviour
     void Update()
     {
         isPlayerInChaseRange = Physics.CheckSphere(transform.position, chaseRange, whatIsPlayer);
-        if (!isPlayerInChaseRange)
+        isPlayerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
+
+        if (!isPlayerInChaseRange && !isPlayerInAttackRange)
             Gaurding();
-        else if (isPlayerInChaseRange)
+        if (isPlayerInChaseRange && !isPlayerInAttackRange)
             Chasing();
+        if (isPlayerInChaseRange && isPlayerInAttackRange)
+            Attacking();
     }
 
     private void Gaurding()
@@ -57,6 +66,12 @@ public class EnemyAI : MonoBehaviour
         agent.SetDestination(player.position);
     }
 
+    private void Attacking()
+    {
+        agent.SetDestination(transform.position);
+        transform.LookAt(player);
+        Instantiate(EnemeyBullet, transform.position, Quaternion.identity);
+    }
     private void SearchForDestination()
     {
         float randomPositionZ = Random.Range(-destinationRange, destinationRange);
@@ -73,7 +88,10 @@ public class EnemyAI : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.red;
+        Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, chaseRange);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 }

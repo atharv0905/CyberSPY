@@ -1118,6 +1118,8 @@ MonoBehaviour:
     m_Bits: 128
   destinationRange: 100
   chaseRange: 16.5
+  attackRange: 10
+  EnemeyBullet: {fileID: 5615780392036604188, guid: d4c1f93cbdac0134fadbd59d5c72f02d, type: 3}
 --- !u!1 &909004706
 GameObject:
   m_ObjectHideFlags: 0
