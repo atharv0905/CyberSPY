@@ -11,6 +11,7 @@ public class EnemyAI : MonoBehaviour
     public LayerMask whatIsGround;
     public LayerMask whatIsPlayer;
     private Transform player;
+    private Animator animator;
 
     // gaurding
     private Vector3 destinationPoint;
@@ -28,10 +29,14 @@ public class EnemyAI : MonoBehaviour
     public float grenadeThrowDelay;
     private bool isEnemyReadyToAttack = true;
 
+    // melee attack
+    public bool isEnemyMeleeAttacker;
+
     void Start()
     {
         player = FindObjectOfType<Player>().transform;
         agent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
     }
 
 
@@ -73,11 +78,23 @@ public class EnemyAI : MonoBehaviour
         agent.SetDestination(transform.position);
         transform.LookAt(player);
 
-        if (isEnemyReadyToAttack)
+        if (isEnemyReadyToAttack && !isEnemyMeleeAttacker)
         {
             Instantiate(EnemeyBullet, transform.position, transform.localRotation);
             isEnemyReadyToAttack = false;
             StartCoroutine(ThrowGrenadeDelay());
+        }
+        else if(isEnemyReadyToAttack && isEnemyMeleeAttacker)
+        {
+            animator.SetTrigger("Attacking");
+        }
+    }
+
+    public void MeleeDamage()
+    {
+        if (isEnemyReadyToAttack)
+        {
+            // apply damage
         }
     }
     private void SearchForDestination()
