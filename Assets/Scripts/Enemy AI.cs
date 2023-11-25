@@ -12,6 +12,7 @@ public class EnemyAI : MonoBehaviour
     public LayerMask whatIsPlayer;
     private Transform player;
     private Animator animator;
+    public Transform firePosition;
 
     // gaurding
     private Vector3 destinationPoint;
@@ -80,7 +81,9 @@ public class EnemyAI : MonoBehaviour
 
         if (isEnemyReadyToAttack && !isEnemyMeleeAttacker)
         {
-            Instantiate(EnemeyBullet, transform.position, transform.localRotation);
+            animator.SetTrigger("Attacking");
+            firePosition.LookAt(player);
+            Instantiate(EnemeyBullet, firePosition.position, transform.rotation);
             isEnemyReadyToAttack = false;
             StartCoroutine(ThrowGrenadeDelay());
         }
@@ -97,6 +100,7 @@ public class EnemyAI : MonoBehaviour
             // apply damage
         }
     }
+
     private void SearchForDestination()
     {
         float randomPositionZ = Random.Range(-destinationRange, destinationRange);

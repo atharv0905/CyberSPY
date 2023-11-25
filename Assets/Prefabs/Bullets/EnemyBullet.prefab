@@ -310,6 +310,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 515799d3eb2db264b86f54c5e9b3f4e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upForce: 8
-  forwardForce: 30
-  grenadeThrowDelay: 10
+  upForce: 1
+  forwardForce: 25
