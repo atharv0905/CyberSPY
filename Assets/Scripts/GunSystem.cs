@@ -99,13 +99,13 @@ public class GunSystem : MonoBehaviour
 
                     if (hit.collider.tag == "WaterLeaker")
                         Instantiate(waterLeak, hit.point, Quaternion.LookRotation(hit.normal));
-
-                    if (hit.collider.tag == "Enemies")
-                        Instantiate(blood, hit.point, Quaternion.LookRotation(hit.normal));
                 }
 
                 if (hit.collider.tag == "Enemies")
+                {
+                    Instantiate(blood, hit.point, Quaternion.LookRotation(hit.normal));
                     hit.collider.GetComponent<EnemyHealthSystem>().TakeDamage(damageAmount);
+                }
             }
             else
             {
