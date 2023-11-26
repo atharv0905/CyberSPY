@@ -7,6 +7,7 @@ public class EnemyBulletController : MonoBehaviour
 {
     Rigidbody rigidbody;
     public float upForce, forwardForce;
+    private float lifeSpan = 3f;
     
     void Start()
     {
@@ -22,7 +23,11 @@ public class EnemyBulletController : MonoBehaviour
 
     void Update()
     {
-        
+        lifeSpan -= Time.deltaTime;
+        if( lifeSpan < 0 )
+        {
+            Destroy(gameObject);
+        }
     }
 
 }

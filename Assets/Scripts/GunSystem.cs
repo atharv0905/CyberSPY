@@ -25,6 +25,7 @@ public class GunSystem : MonoBehaviour
     public int totalBullets;
     public int magazineSize;
     public float reloadTime;
+    public int damageAmount;
     public bool isReloading = false;
 
     // aiming variables
@@ -99,8 +100,8 @@ public class GunSystem : MonoBehaviour
                         Instantiate(waterLeak, hit.point, Quaternion.LookRotation(hit.normal));
                 }
 
-                if(hit.collider.tag == "Enemies")
-                    Destroy(hit.collider.gameObject);
+                if (hit.collider.tag == "Enemies")
+                    hit.collider.GetComponent<EnemyHealthSystem>().TakeDamage();
             }
             else
             {
