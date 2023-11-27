@@ -440,6 +440,7 @@ MonoBehaviour:
   EnemeyBullet: {fileID: 0}
   grenadeThrowDelay: 0
   isEnemyMeleeAttacker: 1
+  meleeDamageAmount: 5
 --- !u!195 &195350761
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1821,7 +1822,7 @@ Transform:
   m_GameObject: {fileID: 1236833091}
   serializedVersion: 2
   m_LocalRotation: {x: 0.93845135, y: -0, z: -0, w: 0.34541145}
-  m_LocalPosition: {x: 0, y: 4.04, z: 3.14}
+  m_LocalPosition: {x: 0, y: 2.89, z: 3.14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1839,9 +1840,10 @@ GameObject:
   - component: {fileID: 1279584789}
   - component: {fileID: 1279584788}
   - component: {fileID: 1279584790}
+  - component: {fileID: 1279584791}
   m_Layer: 7
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1917,8 +1919,8 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 2.94
-  m_Radius: 0.53
+  m_Height: 3.03
+  m_Radius: 0.6
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
@@ -1945,6 +1947,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1279584791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1279584786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbe9f89ca7862724fa1b70d409a5a45f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 10
 --- !u!1 &1288964549
 GameObject:
   m_ObjectHideFlags: 0
@@ -6367,6 +6382,7 @@ MonoBehaviour:
   EnemeyBullet: {fileID: 5615780392036604188, guid: d4c1f93cbdac0134fadbd59d5c72f02d, type: 3}
   grenadeThrowDelay: 0.5
   isEnemyMeleeAttacker: 0
+  meleeDamageAmount: 0
 --- !u!195 &2092890484
 NavMeshAgent:
   m_ObjectHideFlags: 0

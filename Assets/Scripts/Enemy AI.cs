@@ -29,9 +29,11 @@ public class EnemyAI : MonoBehaviour
     public GameObject EnemeyBullet;
     public float grenadeThrowDelay;
     private bool isEnemyReadyToAttack = true;
+    
 
     // melee attack
     public bool isEnemyMeleeAttacker;
+    public int meleeDamageAmount;
 
     void Start()
     {
@@ -97,7 +99,7 @@ public class EnemyAI : MonoBehaviour
     {
         if (isEnemyReadyToAttack)
         {
-            // apply damage
+            player.GetComponent<PlayerHealthSystem>().TakeDamage(meleeDamageAmount);
         }
     }
 

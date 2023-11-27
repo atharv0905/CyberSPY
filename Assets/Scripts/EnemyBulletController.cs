@@ -8,6 +8,7 @@ public class EnemyBulletController : MonoBehaviour
     Rigidbody rigidbody;
     public float upForce, forwardForce;
     private float lifeSpan = 3f;
+    public int damage;
     
     void Start()
     {
@@ -26,6 +27,15 @@ public class EnemyBulletController : MonoBehaviour
         lifeSpan -= Time.deltaTime;
         if( lifeSpan < 0 )
         {
+            Destroy(gameObject);
+        }
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            other.gameObject.GetComponent<PlayerHealthSystem>().TakeDamage(damage);
             Destroy(gameObject);
         }
     }
