@@ -8,8 +8,8 @@ public class WeaponSwitchSystem : MonoBehaviour
 {
     private GunSystem activeGun;
     public List<GunSystem> allGuns = new List<GunSystem>();
+    public List<GunSystem> unlockableGuns = new List<GunSystem>();
     public int currentGunNumber;
-    public string currentGunName;
     private float fireRange;
     void Start()
     {
@@ -20,7 +20,6 @@ public class WeaponSwitchSystem : MonoBehaviour
 
         activeGun = allGuns[currentGunNumber];
         activeGun.gameObject.SetActive(true);
-        currentGunName = activeGun.gameObject.name;
         fireRange = activeGun.gameObject.GetComponent<GunSystem>().maxFireRange;
     }
 
@@ -41,19 +40,37 @@ public class WeaponSwitchSystem : MonoBehaviour
 
         activeGun = allGuns[currentGunNumber];
         activeGun.gameObject.SetActive(true);
-        GetCurrentGunName();
         GetMaxFireRange();
     }
     
-    public string GetCurrentGunName()
-    {
-        currentGunName = activeGun.gameObject.name;
-        return currentGunName;
-    }
-
     public float GetMaxFireRange()
     {
         fireRange = activeGun.gameObject.GetComponent<GunSystem>().maxFireRange;
         return fireRange;
+    }
+
+    public void AddGun(string gunName)
+    {
+        bool unlocked = false;
+        if(unlockableGuns.Count > 0)
+        {
+            for(int i =0; i < unlockableGuns.Count; i++)
+            {
+                if (unlockableGuns[i].name == gunName)
+                {
+                    allGuns.Add(unlockableGuns[i]);
+                    unlockableGuns.RemoveAt(i);
+
+                    i = unlockableGuns.Count;
+                    unlocked = true;
+                }
+            }
+        }
+
+        if (unlocked)
+        {
+            currentGunNumber = allGuns.Count - 2;
+            SwitchGun();
+        }
     }
 }

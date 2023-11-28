@@ -7,7 +7,7 @@ public class GunSystem : MonoBehaviour
 {
     public Transform myCameraHead;
     private UICanvasController canvas;
-    private string currentGun;
+    public string currentGunName;
     private float fireRange;
 
     // firing variables
@@ -44,8 +44,8 @@ public class GunSystem : MonoBehaviour
         totalBullets -= magazineSize;
         bulletsAvailable = magazineSize;
         gunStartPosition = transform.localPosition;
+        currentGunName = gameObject.name;
         canvas = FindObjectOfType<UICanvasController>();
-        currentGun = FindObjectOfType<WeaponSwitchSystem>().GetCurrentGunName();
         fireRange = FindObjectOfType<WeaponSwitchSystem>().GetMaxFireRange();
     }
 
