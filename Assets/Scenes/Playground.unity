@@ -465,12 +465,11 @@ MonoBehaviour:
   blood: {fileID: 1000013169864706, guid: efb2e88f584a9e642a20877601756879, type: 3}
   canAutoFire: 0
   timeBetweenShots: 0.5
-  bulletsAvailable: 0
   totalBullets: 15
   magazineSize: 5
   reloadTime: 4
   damageAmount: 10
-  isReloading: 0
+  maxFireRange: 250
   aimPosition: {fileID: 909004707}
   zoomAmount: 30
 --- !u!1 &195350755
@@ -817,6 +816,7 @@ MonoBehaviour:
   - {fileID: 2054981392}
   - {fileID: 191681347}
   currentGunNumber: 0
+  currentGunName: 
 --- !u!1 &409819237
 GameObject:
   m_ObjectHideFlags: 0
@@ -6398,12 +6398,11 @@ MonoBehaviour:
   blood: {fileID: 1000013169864706, guid: efb2e88f584a9e642a20877601756879, type: 3}
   canAutoFire: 0
   timeBetweenShots: 0.1
-  bulletsAvailable: 0
   totalBullets: 50
   magazineSize: 15
   reloadTime: 1
   damageAmount: 3
-  isReloading: 0
+  maxFireRange: 80
   aimPosition: {fileID: 909004707}
   zoomAmount: 40
 --- !u!1 &1665048275
@@ -7256,12 +7255,11 @@ MonoBehaviour:
   blood: {fileID: 1000013169864706, guid: efb2e88f584a9e642a20877601756879, type: 3}
   canAutoFire: 1
   timeBetweenShots: 0.1
-  bulletsAvailable: 0
   totalBullets: 150
   magazineSize: 30
   reloadTime: 2
   damageAmount: 5
-  isReloading: 0
+  maxFireRange: 140
   aimPosition: {fileID: 909004707}
   zoomAmount: 45
 --- !u!1 &2092890482

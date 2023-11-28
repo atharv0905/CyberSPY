@@ -7,8 +7,11 @@ public class GunSystem : MonoBehaviour
 {
     public Transform myCameraHead;
     private UICanvasController canvas;
+    private string currentGun;
+    private float fireRange;
 
     // firing variables
+    private float hitDistance;
     public GameObject bullet;
     public Transform firePoint;
     public GameObject muzzleFlash;
@@ -22,12 +25,13 @@ public class GunSystem : MonoBehaviour
 
     public float timeBetweenShots;
 
-    public int bulletsAvailable;
+    private int bulletsAvailable;
     public int totalBullets;
     public int magazineSize;
     public float reloadTime;
     public int damageAmount;
-    public bool isReloading = false;
+    public float maxFireRange;
+    private bool isReloading = false;
 
     // aiming variables
     public Transform aimPosition;
@@ -41,6 +45,8 @@ public class GunSystem : MonoBehaviour
         bulletsAvailable = magazineSize;
         gunStartPosition = transform.localPosition;
         canvas = FindObjectOfType<UICanvasController>();
+        currentGun = FindObjectOfType<WeaponSwitchSystem>().GetCurrentGunName();
+        fireRange = FindObjectOfType<WeaponSwitchSystem>().GetMaxFireRange();
     }
 
     void Update()
@@ -89,7 +95,7 @@ public class GunSystem : MonoBehaviour
 
             RaycastHit hit;
 
-            if (Physics.Raycast(myCameraHead.position, myCameraHead.forward, out hit, 100f))
+            if (Physics.Raycast(myCameraHead.position, myCameraHead.forward, out hit, fireRange))
             {
                 if (Vector3.Distance(myCameraHead.position, hit.point) >= 2f)
                 {
