@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class EnemyHealthSystem : MonoBehaviour
 {
-    public int currentHealth;
+    private int currentHealth;
+    public int maxHealth;
+    private EnemyUIController uiController;
     void Start()
     {
-        
+        currentHealth = maxHealth;
+        uiController = GetComponentInChildren<EnemyUIController>();
+        uiController.SetMaxHealth(currentHealth);
     }
 
 
@@ -19,6 +23,7 @@ public class EnemyHealthSystem : MonoBehaviour
     public void TakeDamage(int damageAmount)
     {
         currentHealth -= damageAmount;
+        uiController.SetHealth(currentHealth);
         if(currentHealth <= 0 )
         {
             Destroy(gameObject);
