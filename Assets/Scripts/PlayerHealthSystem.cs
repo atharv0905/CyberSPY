@@ -33,4 +33,13 @@ public class PlayerHealthSystem : MonoBehaviour
         }
     }
 
+    public void HealPlayer(int healing)
+    {
+        currentHealth += healing;
+        if(currentHealth > maxHealth)
+            currentHealth = maxHealth;
+
+        healthBar.SetHealth(currentHealth);
+    }
+
 }
