@@ -7,14 +7,15 @@ public class GunSystem : MonoBehaviour
 {
     public Transform myCameraHead;
     private UICanvasController canvas;
-    public string currentGunName;
+    private string currentGunName;
     private float fireRange;
+    public bool isRocketLauncher;
 
     // firing variables
-    private float hitDistance;
     public GameObject bullet;
     public Transform firePoint;
     public GameObject muzzleFlash;
+    public GameObject rocketTrail;
     public GameObject bulletHole;
     public GameObject waterLeak;
     public GameObject blood;
@@ -100,14 +101,18 @@ public class GunSystem : MonoBehaviour
                 if (Vector3.Distance(myCameraHead.position, hit.point) >= 2f)
                 {
                     firePoint.LookAt(hit.point);
-                    if (hit.collider.tag == "Shootable")
-                        Instantiate(bulletHole, hit.point, Quaternion.LookRotation(hit.normal));
 
-                    if (hit.collider.tag == "WaterLeaker")
-                        Instantiate(waterLeak, hit.point, Quaternion.LookRotation(hit.normal));
+                    if (!isRocketLauncher)
+                    {
+                        if (hit.collider.tag == "Shootable")
+                            Instantiate(bulletHole, hit.point, Quaternion.LookRotation(hit.normal));
+
+                        if (hit.collider.tag == "WaterLeaker")
+                            Instantiate(waterLeak, hit.point, Quaternion.LookRotation(hit.normal));
+                    }
                 }
 
-                if (hit.collider.tag == "Enemies")
+                if (hit.collider.tag == "Enemies" && !isRocketLauncher)
                 {
                     Instantiate(blood, hit.point, Quaternion.LookRotation(hit.normal));
                     hit.collider.GetComponent<EnemyHealthSystem>().TakeDamage(damageAmount);
@@ -120,8 +125,16 @@ public class GunSystem : MonoBehaviour
 
             bulletsAvailable--;
 
-            Instantiate(bullet, firePoint.position, firePoint.rotation, firePoint);
-            Instantiate(muzzleFlash, firePoint.position, firePoint.rotation, firePoint);
+            if (!isRocketLauncher)
+            {
+                Instantiate(bullet, firePoint.position, firePoint.rotation, firePoint);
+                Instantiate(muzzleFlash, firePoint.position, firePoint.rotation, firePoint);
+            }
+            else
+            {
+                Instantiate(bullet, firePoint.position, firePoint.rotation);
+                Instantiate(rocketTrail, firePoint.position, firePoint.rotation);
+            }
 
             StartCoroutine(ResetShot());
 

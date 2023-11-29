@@ -6,8 +6,9 @@ public class BulletController : MonoBehaviour
 {
     public float speed;
     public Rigidbody myRigidBody;
-
     public float bulletLife;
+    public ParticleSystem explosionEffect;
+    public bool isRocket;
     void Start()
     {
         
@@ -32,6 +33,10 @@ public class BulletController : MonoBehaviour
     {
         //if (other.tag == "Enemies")
         //    Destroy(other.gameObject);
+        if (isRocket)
+        {
+            Instantiate(explosionEffect, transform.position, Quaternion.identity);
+        }
         Destroy(gameObject);
     }
 }
