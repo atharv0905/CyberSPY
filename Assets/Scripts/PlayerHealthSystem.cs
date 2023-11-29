@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public class PlayerHealthSystem : MonoBehaviour
@@ -40,6 +41,13 @@ public class PlayerHealthSystem : MonoBehaviour
             currentHealth = maxHealth;
 
         healthBar.SetHealth(currentHealth);
+    }
+
+    public bool IsPickupFirstAidBox()
+    {
+        if(currentHealth == maxHealth)
+            return false;
+        return true;
     }
 
 }

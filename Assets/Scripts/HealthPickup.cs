@@ -10,8 +10,11 @@ public class HealthPickup : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            other.GetComponent<PlayerHealthSystem>().HealPlayer(amountOfHealing);
-            Destroy(gameObject);
+            if (other.GetComponent<PlayerHealthSystem>().IsPickupFirstAidBox())
+            {
+                other.GetComponent<PlayerHealthSystem>().HealPlayer(amountOfHealing);
+                Destroy(gameObject);
+            }
         }
     }
 }
