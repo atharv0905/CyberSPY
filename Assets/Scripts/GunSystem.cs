@@ -30,6 +30,7 @@ public class GunSystem : MonoBehaviour
     private int bulletsAvailable;
     public int totalBullets;
     public int magazineSize;
+    public int addAmmoOnPickup;
     public float reloadTime;
     public int damageAmount;
     public float maxFireRange;
@@ -170,6 +171,11 @@ public class GunSystem : MonoBehaviour
         isReloading = true;
         StartCoroutine(ReloadTime());
 
+    }
+
+    public void AddAmmo()
+    {
+        totalBullets += addAmmoOnPickup;
     }
 
     IEnumerator ResetShot()

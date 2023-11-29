@@ -289,6 +289,7 @@ MonoBehaviour:
   timeBetweenShots: 0.5
   totalBullets: 15
   magazineSize: 5
+  addAmmoOnPickup: 3
   reloadTime: 3
   damageAmount: 0
   maxFireRange: 250
@@ -535,6 +536,7 @@ MonoBehaviour:
   timeBetweenShots: 0.5
   totalBullets: 15
   magazineSize: 5
+  addAmmoOnPickup: 5
   reloadTime: 3
   damageAmount: 10
   maxFireRange: 250
@@ -7039,6 +7041,7 @@ MonoBehaviour:
   timeBetweenShots: 0.1
   totalBullets: 50
   magazineSize: 15
+  addAmmoOnPickup: 10
   reloadTime: 2
   damageAmount: 3
   maxFireRange: 80
@@ -8148,6 +8151,7 @@ MonoBehaviour:
   timeBetweenShots: 0.1
   totalBullets: 150
   magazineSize: 30
+  addAmmoOnPickup: 30
   reloadTime: 2
   damageAmount: 5
   maxFireRange: 140
