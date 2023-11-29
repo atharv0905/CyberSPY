@@ -7,6 +7,7 @@ public class GunSystem : MonoBehaviour
 {
     public Transform myCameraHead;
     private UICanvasController canvas;
+    public Animator animator;
     private string currentGunName;
     private float fireRange;
     public bool isRocketLauncher;
@@ -40,6 +41,8 @@ public class GunSystem : MonoBehaviour
     private float aimTransitionSpeed = 2f;
     public float zoomAmount;
 
+    string gunAnimationName;
+
     void Start()
     {
         totalBullets -= magazineSize;
@@ -55,6 +58,26 @@ public class GunSystem : MonoBehaviour
         Shoot();
         GunManager();
         UpdateAmmoText();
+        AnimationManager();
+    }
+
+    private void AnimationManager()
+    {
+        switch (currentGunName)
+        {
+            case "Pistol":
+                gunAnimationName = "Pistol Reload";
+                break;
+            case "Rifle":
+                gunAnimationName = "Rifle Reload";
+                break;
+            case "Sniper":
+                gunAnimationName = "Sniper Reload";
+                break;
+            case "Rocket Laucher":
+                gunAnimationName = "Rocket Launcher Reload";
+                break;
+        }
     }
 
     private void GunManager()
@@ -143,20 +166,7 @@ public class GunSystem : MonoBehaviour
 
     private void Reload()
     {
-        
-        int bulletsToAdd = magazineSize - bulletsAvailable;
-
-        if(totalBullets > bulletsToAdd)
-        {
-            totalBullets -= bulletsToAdd;
-            bulletsAvailable = magazineSize;
-        }
-        else
-        {
-            bulletsAvailable += totalBullets;
-            totalBullets = 0;
-        }
-
+        animator.SetTrigger(gunAnimationName);
         isReloading = true;
         StartCoroutine(ReloadTime());
 
@@ -171,6 +181,19 @@ public class GunSystem : MonoBehaviour
     IEnumerator ReloadTime()
     {
         yield return new WaitForSeconds(reloadTime);
+
+        int bulletsToAdd = magazineSize - bulletsAvailable;
+        if (totalBullets > bulletsToAdd)
+        {
+            totalBullets -= bulletsToAdd;
+            bulletsAvailable = magazineSize;
+        }
+        else
+        {
+            bulletsAvailable += totalBullets;
+            totalBullets = 0;
+        }
+
         isReloading = false;
     }
 
