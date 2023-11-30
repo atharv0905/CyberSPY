@@ -697,6 +697,7 @@ GameObject:
   - component: {fileID: 254267853}
   - component: {fileID: 254267854}
   - component: {fileID: 254267855}
+  - component: {fileID: 254267856}
   m_Layer: 0
   m_Name: Weapon Pickup
   m_TagString: Untagged
@@ -754,6 +755,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunToPickUpName: Rocket Laucher
+--- !u!95 &254267856
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 254267852}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 46fc02de43b14ae4189d3faae383f608, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &254854076
 GameObject:
   m_ObjectHideFlags: 0
@@ -1514,6 +1536,7 @@ GameObject:
   - component: {fileID: 644282433}
   - component: {fileID: 644282434}
   - component: {fileID: 644282435}
+  - component: {fileID: 644282436}
   m_Layer: 0
   m_Name: Ammo Pickup
   m_TagString: Untagged
@@ -1570,6 +1593,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f7d76540ce776d48bd6787049f350fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &644282436
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 644282432}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5be1f562747241d439c319400dc79663, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -6409,6 +6453,7 @@ GameObject:
   - component: {fileID: 1392731553}
   - component: {fileID: 1392731554}
   - component: {fileID: 1392731555}
+  - component: {fileID: 1392731556}
   m_Layer: 0
   m_Name: First Aid Kit Pickup
   m_TagString: Untagged
@@ -6466,6 +6511,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   amountOfHealing: 5
+--- !u!95 &1392731556
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1392731552}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 223b0f14c6b50ab4ab9bf5de1d4e5bfc, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1419130561
 GameObject:
   m_ObjectHideFlags: 0
