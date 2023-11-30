@@ -34,7 +34,7 @@ public class GunSystem : MonoBehaviour
     public float reloadTime;
     public int damageAmount;
     public float maxFireRange;
-    private bool isReloading = false;
+    public bool isReloading = false;
 
     // aiming variables
     public Transform aimPosition;
