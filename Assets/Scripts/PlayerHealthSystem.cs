@@ -20,7 +20,7 @@ public class PlayerHealthSystem : MonoBehaviour
 
     void Update()
     {
-        
+
     }
 
     public void TakeDamage(int amountOfDamage)
@@ -29,6 +29,7 @@ public class PlayerHealthSystem : MonoBehaviour
         healthBar.SetHealth(currentHealth);
         if (currentHealth <= 0)
         {
+            AudioManager.instance.StopBackgroundMusic();
             gameObject.SetActive(false);
             FindObjectOfType<GameManager>().PlayerRespawn();
         }
