@@ -152,6 +152,7 @@ public class Player : MonoBehaviour
 
         myAnimator.SetFloat(ANIM_PLAYER_SPEED ,movement.magnitude);
         controller.Move(movement);
+        // Debug.Log(movement.magnitude);
 
         velocity.y += Physics.gravity.y * Mathf.Pow(Time.deltaTime, 2) * gravityModifier;
         controller.Move(velocity);

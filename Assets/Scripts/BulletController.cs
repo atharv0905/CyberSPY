@@ -11,7 +11,7 @@ public class BulletController : MonoBehaviour
     public bool isRocket;
     void Start()
     {
-        
+        // Debug.Log("Bullet created: ");
     }
 
     void Update()
