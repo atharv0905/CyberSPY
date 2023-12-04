@@ -168,6 +168,7 @@ public class GunSystem : MonoBehaviour
     private void Reload()
     {
         animator.SetTrigger(gunAnimationName);
+        AudioManager.instance.PlayerSFX(7);
         isReloading = true;
         StartCoroutine(ReloadTime());
 

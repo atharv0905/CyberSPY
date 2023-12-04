@@ -26,9 +26,11 @@ public class PlayerHealthSystem : MonoBehaviour
     public void TakeDamage(int amountOfDamage)
     {
         currentHealth -= amountOfDamage;
+        AudioManager.instance.PlayerSFX(4);
         healthBar.SetHealth(currentHealth);
         if (currentHealth <= 0)
         {
+            AudioManager.instance.PlayerSFX(3);
             AudioManager.instance.StopBackgroundMusic();
             gameObject.SetActive(false);
             FindObjectOfType<GameManager>().PlayerRespawn();

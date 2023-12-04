@@ -11,6 +11,7 @@ public class WeaponPickup : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             other.gameObject.GetComponentInChildren<WeaponSwitchSystem>().AddGun(gunToPickUpName);
+            AudioManager.instance.PlayerSFX(6);
             Destroy(gameObject);
         }
     }

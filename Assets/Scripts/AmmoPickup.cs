@@ -9,6 +9,7 @@ public class AmmoPickup : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             other.GetComponentInChildren<GunSystem>().AddAmmo();
+            AudioManager.instance.PlayerSFX(0);
             Destroy(gameObject);
         }
     }

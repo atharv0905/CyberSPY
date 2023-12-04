@@ -13,6 +13,7 @@ public class HealthPickup : MonoBehaviour
             if (other.GetComponent<PlayerHealthSystem>().IsPickupFirstAidBox())
             {
                 other.GetComponent<PlayerHealthSystem>().HealPlayer(amountOfHealing);
+                AudioManager.instance.PlayerSFX(1);
                 Destroy(gameObject);
             }
         }

@@ -113,6 +113,7 @@ public class Player : MonoBehaviour
         if (Input.GetButtonDown(JUMP_KEY) && readyToJump)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * Physics.gravity.y) * Time.deltaTime;
+            AudioManager.instance.PlayerSFX(2);
         }
         controller.Move(velocity);
     }
