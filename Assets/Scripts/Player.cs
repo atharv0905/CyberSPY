@@ -66,6 +66,8 @@ public class Player : MonoBehaviour
    
     void Update()
     {
+        if(PauseMenu.isGamePaused) return;
+
         PlayerMovement();
         CameraMovement();
         Jump();

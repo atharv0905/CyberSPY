@@ -56,6 +56,8 @@ public class GunSystem : MonoBehaviour
 
     void Update()
     {
+        if(PauseMenu.isGamePaused) return;
+
         Shoot();
         GunManager();
         UpdateAmmoText();
